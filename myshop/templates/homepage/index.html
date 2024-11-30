@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhen's Glassware</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/categories/">Categories</a></li>
+            <li><a href="/cart/">Cart</a></li>
+            <li><a href="/contact/">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner -->
+    <header>
+        <div class="banner">
+            <h1>Welcome to My Shop</h1>
+            <p>Explore a wide range of products with a touch of simplicity and elegance.</p>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="products">
+        <h2>Our Products</h2>
+
+        <!-- Geo Round Jar -->
+        <h3>Geo Round Jar</h3>
+        <div class="product-grid">
+            {% for product in products.round %}
+                <div class="product">
+                    <img src="{% static 'images/round/'|add:product.image %}" alt="{{ product.name }}">
+                    <h4>{{ product.name }}</h4>
+                    <p>Price: {{ product.price }}</p>
+                    <form action="{% url 'add_to_cart' product.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Geo Cut Jar -->
+        <h3>Geo Cut Jar</h3>
+        <div class="product-grid">
+            {% for product in products.geo %}
+                <div class="product">
+                    <img src="{% static 'images/geo/'|add:product.image %}" alt="{{ product.name }}">
+                    <h4>{{ product.name }}</h4>
+                    <p>Price: {{ product.price }}</p>
+                    <form action="{% url 'add_to_cart' product.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Checkered Jar -->
+        <h3>Checkered Jar</h3>
+        <div class="product-grid">
+            {% for product in products.other %}
+                <div class="product">
+                    <img src="{% static 'images/ch/'|add:product.image %}" alt="{{ product.name }}">
+                    <h4>{{ product.name }}</h4>
+                    <p>Price: {{ product.price }}</p>
+                    <form action="{% url 'add_to_cart' product.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 My Nordic E-Commerce Store. All Rights Reserved.</p>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Twitter</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
